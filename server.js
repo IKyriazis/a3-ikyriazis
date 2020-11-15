@@ -32,44 +32,6 @@ app.use(express.json());
 app.use(session({ secret: "cats" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// imports used for login
-// app.use(passport.initialize());
-// app.use(passport.session());
-// app.use(flash());
-
-
-// The login stuff below will be implemented when i get the chance
-// username to add with comment
-
-// passport.use(new LocalStrategy(
-//     function(username, password, done) {
-//       users.findOne({ username: username }, async function(err, user) {
-//         if (err) { return done(err); }
-//         let doesUserExist = await userExists(username);
-//         if (!doesUserExist) {
-//           return done(null, false, { message: 'Incorrect username.' });
-//         }
-//         let actualPassword = await getPassword(username);
-//         if (actualPassword !== password) {
-//           return done(null, false, { message: 'Incorrect password.' });
-//         }
-//         console.log(user);
-//         return done(null, user);
-//       });
-//     }
-// ));
-
-// passport.serializeUser(function(user, done) {
-//   console.log(user._id);
-//   done(null, user._id);
-// });
-//
-// passport.deserializeUser(function(id, done) {
-//   users.findOne({_id: id}, function(err, user) {
-//     done(err, user);
-//   });
-// });
-
 // app.get("/getusername", (request, response) => {
 //   if (user !== null) {
 //     console.log("sending json");
@@ -93,26 +55,6 @@ app.post("/register", (request, response) => {
 // app.get('/logout', function(req, res){
 //   req.logout();
 //   res.redirect('/');
-// });
-
-// app.post('/login', async function (req, res){
-//   let userData = req.body;
-//   let username = userData.username;
-//   let password = userData.password;
-//   let isActualUser = await userExists(username);
-//   if (isActualUser) {
-//     let actualPassword = await getPassword(username);
-//     if (actualPassword === password) {
-//       console.log("user logged in");
-//
-//     }
-//     else {
-//       res.sendStatus(500);
-//     }
-//   } else {
-//     res.sendStatus(500);
-//   }
-//   return res.end();
 // });
 
 app.post("/login", bodyParser.json(), async function(
