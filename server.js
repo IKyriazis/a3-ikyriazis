@@ -181,9 +181,14 @@ app.get("/loadData", async (request, response) => {
 })
 
 app.post("/addpost", (request, response) => {
-  posts.insertOne(request.body).then(function () {
-    console.log("post added");
-  })
+  if (request.session.username === 'chrees') {
+    posts.insertOne(request.body).then(function () {
+      console.log("post added");
+    })
+  } else {
+    console.log('U r not chrees');
+  }
+
 });
 
 app.post("/loadcomments", (request, response) => {
@@ -220,7 +225,12 @@ app.post("/editpost", async (request, response) => {
 });
 
 app.post("/deletepost", async (request, response) => {
-  await posts.deleteOne({title: request.body.title});
+  if (request.session.username === 'chrees') {
+    await posts.deleteOne({title: request.body.title});
+  }
+  else {
+    console.log('U r not chrees');
+  }
 });
 
 let port = process.env.PORT;
