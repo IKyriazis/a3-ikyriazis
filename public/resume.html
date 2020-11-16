@@ -1,5 +1,3 @@
-<!-- This is a static file -->
-<!-- served from your routes in server.js -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,18 +5,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <meta charset="utf-8">
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <meta content="View and purchase artwork created by Theresa Torraca" name="description">
-
-    <title>Canvas Kicks</title>
-    <link href="/assets/favicon.ico" id="favicon" rel="icon" type="image/x-icon">
-    <!-- import the webpage's stylesheet -->
-    <link href="/style.css" rel="stylesheet">
-    <!-- import the webpage's client-side javascript file -->
-    <script defer src="/script.js"></script>
+    <meta charset="UTF-8">
+    <title>Resume</title>
+    <style>
+        body {
+            height: 100vh;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -32,11 +25,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="prevWorks.html">Completed Orders <span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
-                <a class="nav-link" href="resume.html">Resume</a>
+                <a class="nav-link" href="prevWorks.html">Completed Orders</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="resume.html">Resume <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Message me!</a>
@@ -44,25 +37,6 @@
         </ul>
     </div>
 </nav>
-<div id="topmenu">
-    <!--    <div></div><h1>Canvas Kicks by Theresa Torraca</h1>-->
-    <div id="username"></div>
-    <div>
-    </div>
-    <input placeholder="Username" type="text" id="user">
-    <input placeholder="Password" type="password" id="pass">
-    <button id="register">Register</button>
-    <button id="login">Login</button>
-</div>
-<div id="post-container">
-</div>
-<!--  <div id="mycomments">-->
-<!--      <input type="submit" id="viewmycomments">View your comments</div>-->
-
-<!--  </div>-->
-<div id="contact">
-    <p>Instagram: <a target="_blank" href="https://www.instagram.com/canvas_kicks/">@canvas_kicks</a></p>
-    <p>Email: <a href="mailto:thetor610@gmail.com">thetor610@gmail.com</a></p>
-</div>
+<embed src="assets/Resume_TheresaTorraca_11_2020.pdf" height="100%" width="100%">
 </body>
 </html>
