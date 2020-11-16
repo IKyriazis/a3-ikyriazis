@@ -1,15 +1,26 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
 <!DOCTYPE html>
-<html lang="en"l>
+<html lang="en">
 <head>
-<title>Canvas Kicks</title>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="View and purchase artwork created by Theresa Torraca" name="description">
+
+    <title>Canvas Kicks</title>
+    <link href="/assets/favicon.ico" id="favicon" rel="icon" type="image/x-icon">
+    <!-- import the webpage's stylesheet -->
+    <link href="/style.css" rel="stylesheet">
+    <!-- import the webpage's client-side javascript file -->
+    <script defer src="/script.js"></script>
 </head>
 <body>
-<style>
-</style>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#"><img height="150px" width="300px" src="/assets/logo.png"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,11 +29,11 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
-                <a class="nav-link" href="prevWorks.html">Completed Orders</a>
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="prevWorks.html">Completed Orders <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Resume</a>
@@ -33,6 +44,25 @@
         </ul>
     </div>
 </nav>
+<div id="topmenu">
+    <!--    <div></div><h1>Canvas Kicks by Theresa Torraca</h1>-->
+    <div id="username"></div>
+    <div>
+    </div>
+    <input placeholder="Username" type="text" id="user">
+    <input placeholder="Password" type="password" id="pass">
+    <button id="register">Register</button>
+    <button id="login">Login</button>
+</div>
+<div id="post-container">
+</div>
+<!--  <div id="mycomments">-->
+<!--      <input type="submit" id="viewmycomments">View your comments</div>-->
 
+<!--  </div>-->
+<div id="contact">
+    <p>Instagram: <a target="_blank" href="https://www.instagram.com/canvas_kicks/">@canvas_kicks</a></p>
+    <p>Email: <a href="mailto:thetor610@gmail.com">thetor610@gmail.com</a></p>
+</div>
 </body>
 </html>
