@@ -128,7 +128,7 @@ app.post("/addpost", (request, response) => {
       console.log("post added");
     })
   } else {
-    console.log('U r not chrees');
+    console.log('U r not an admin');
   }
 
 });
@@ -171,7 +171,7 @@ app.post("/deletepost", async (request, response) => {
     await posts.deleteOne({title: request.body.title});
   }
   else {
-    console.log('U r not chrees');
+    console.log('U r not an admin');
   }
 });
 
