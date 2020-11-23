@@ -179,8 +179,10 @@ app.post("/deletepost", async (request, response) => {
 
 app.post("/sendMessage", async (req, res) => {
   if (req.session.auth === true) {
-    await messages.insertOne({user: req.session.username, message: req.body.message, date: req.body.date, commMethod: req.body.commMethod, comm: req.body.comm, name: req.body.name});
-    res.json({message: "Message sent successfully"});
+    messages.insertOne({user: req.session.username, message: req.body.message, date: req.body.date, commMethod: req.body.commMethod, comm: req.body.comm, name: req.body.name}).then(() => {
+      res.json({message: "Message sent successfully"});
+    });
+
   }
   else {
     res.json({message: "You must be logged in to send a message"});

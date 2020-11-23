@@ -77,7 +77,7 @@
     let phoneform = `<label for="phone">Phone number</label>
         <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" required>
         <label for="confirmnum">Confirm phone number</label>
-        <input type="email" class="form-control" id="confirmnum" placeholder="Confirm phone number" required>`;
+        <input type="tel" class="form-control" id="confirmnum" placeholder="Confirm phone number" required>`;
     // submit.addEventListener("click", (e) => {
     //     e.preventDefault();
     //     if (preference.value === "Email") {
@@ -110,9 +110,9 @@
             form.addEventListener('submit', function(event) {
                 if (form.checkValidity() === false) {
                     event.preventDefault();
-                    event.stopPropagation();
+                    // event.stopPropagation();
                 }
-                form.classList.add('was-validated');
+                else if (form.checkValidity() === true) {
                     if (preference.value === "Email") {
                         let email = document.getElementById("email");
                         let confirm = document.getElementById("confirmemail");
@@ -125,15 +125,22 @@
                              <span aria-hidden="true">&times;</span>
                             </button>`
                             comm.prepend(alert);
+                            event.preventDefault();
+                            // event.stopPropagation();
                         }
-                        else {
+                        else if (form.checkValidity() === true) {
                             let d = new Date();
                             let date = d.getMonth() + "-" + d.getDate() + "-" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
                             fetch("/sendmessage", {
                                 method: "POST",
                                 headers: {'Content-Type': 'application/json'},
                                 body: JSON.stringify({message: message.value, commMethod: preference.value, comm: email.value, date, name: name.value})
-                            }).then(res => res.json().then(res => alert(res.message)));
+                            }).then(res => {
+                                res.json().then(res => {
+                                    console.log(res.message);
+                                    alert(res.message);
+                                })
+                            });
                         }
                     }
                     else {
@@ -148,8 +155,9 @@
                              <span aria-hidden="true">&times;</span>
                             </button>`
                             comm.prepend(alert);
+                            // event.stopPropagation();
                         }
-                        else {
+                        else if (form.checkValidity() === true) {
                             let d = new Date();
                             let date = d.getMonth() + "-" + d.getDate() + "-" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
                             fetch("/sendmessage", {
@@ -159,6 +167,8 @@
                             }).then(res => res.json().then(res => alert(res.message)));
                         }
                     }
+                }
+                form.classList.add('was-validated');
             }, false);
         });
     }, false);
