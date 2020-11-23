@@ -43,10 +43,16 @@
     <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" placeholder="Enter name" required>
+        <div class="invalid-feedback">
+            I'd like to know who you are!
+        </div>
     </div>
     <div class="form-group">
         <label for="message">Message</label>
         <textarea class="form-control" id="message" placeholder="Message text" required></textarea>
+        <div class="invalid-feedback">
+            I want to hear what you have to say!
+        </div>
     </div>
     <div class="form-group">
         <label for="commmethod">Communication Preference</label>
@@ -59,8 +65,14 @@
     <div class="form-group" id="comm">
         <label for="email">Email</label>
         <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+        <div class="invalid-feedback">
+            I need an email so I can get back to you!
+        </div>
         <label for="confirmemail">Confirm Email</label>
         <input type="email" class="form-control" id="confirmemail" placeholder="Confirm email" required>
+        <div class="invalid-feedback">
+            Please confirm your email.
+        </div>
     </div>
     <button type="submit" class="btn btn-primary" id="submit">Send message!</button>
 </form>
@@ -72,12 +84,25 @@
     let submit = document.getElementById("submit");
     let emailform = `<label for="email">Email</label>
         <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+        <div class="invalid-feedback">
+            I need an email so I can get back to you!
+        </div>
         <label for="confirmemail">Confirm Email</label>
-        <input type="email" class="form-control" id="confirmemail" placeholder="Confirm email" required>`;
+        <input type="email" class="form-control" id="confirmemail" placeholder="Confirm email" required>
+        <div class="invalid-feedback">
+            Please confirm your email.
+        </div>`;
     let phoneform = `<label for="phone">Phone number</label>
         <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" required>
+        <div class="invalid-feedback">
+            I need a phone number so I can get back to you!
+        </div>
         <label for="confirmnum">Confirm phone number</label>
-        <input type="tel" class="form-control" id="confirmnum" placeholder="Confirm phone number" required>`;
+        <input type="tel" class="form-control" id="confirmnum" placeholder="Confirm phone number" required>
+        <div class="invalid-feedback">
+            Please confirm your phone number.
+        </div>
+    `;
     // submit.addEventListener("click", (e) => {
     //     e.preventDefault();
     //     if (preference.value === "Email") {
@@ -126,7 +151,6 @@
                             </button>`
                             comm.prepend(alert);
                             event.preventDefault();
-                            // event.stopPropagation();
                         }
                         else if (form.checkValidity() === true) {
                             let d = new Date();
@@ -155,7 +179,6 @@
                              <span aria-hidden="true">&times;</span>
                             </button>`
                             comm.prepend(alert);
-                            // event.stopPropagation();
                         }
                         else if (form.checkValidity() === true) {
                             let d = new Date();
@@ -164,7 +187,12 @@
                                 method: "POST",
                                 headers: {'Content-Type': 'application/json'},
                                 body: JSON.stringify({message: message.value, commMethod: preference.value, comm: phone.value, date, name: name.value})
-                            }).then(res => res.json().then(res => alert(res.message)));
+                            }).then(res => {
+                                res.json().then(res => {
+                                    console.log(res.message);
+                                    alert(res.message);
+                                })
+                            });
                         }
                     }
                 }

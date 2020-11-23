@@ -143,19 +143,17 @@ login.addEventListener("click", function () {
         body: JSON.stringify({username: user.value, password: pass.value}),
         headers: {'Content-Type': 'application/json'}
     }).then((result) => {
-        fetch('/getusername')
-            .then(response => response.json())
-            .then(json => document.getElementById("username").innerHTML = json.username);
+        result.json().then(result => alert(result.message));
     })
 });
-let mycomments = document.getElementById("viewmycomments");
-let displaymycomments = document.getElementById("mycomments");
-mycomments.addEventListener("click", () => {
-    fetch("/getmycomments").then(res => res.json()).then(res => {
-        res.forEach((comment) => {
-            let p = document.createElement("p");
-            p.innerText = comment.text;
-            displaymycomments.appendChild(p);
-        })
-    })
-})
+// let mycomments = document.getElementById("viewmycomments");
+// let displaymycomments = document.getElementById("mycomments");
+// mycomments.addEventListener("click", () => {
+//     fetch("/getmycomments").then(res => res.json()).then(res => {
+//         res.forEach((comment) => {
+//             let p = document.createElement("p");
+//             p.innerText = comment.text;
+//             displaymycomments.appendChild(p);
+//         })
+//     })
+// })

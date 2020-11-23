@@ -44,12 +44,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.post("/register", (request, response) => {
   users.findOne({username: request.body.username}).then(result => {
     if(result !== null) {
-      response.json({successful: false});
-      console.log("Username already exists");
+      response.json({message: "Username is taken"});
+
     }
     else {
       users.insertOne(request.body).then();
-      response.json({successful: true});
+      response.json({message: "Account created successfully"});
     }
   })
 });
@@ -67,40 +67,26 @@ app.post("/login", bodyParser.json(), async function(
   let password = request.body.password;
 
   let results = await users
-      .find({ username: username, password: password })
+      .find({ username: username})
       .toArray();
   let presentAccountID = null;
 
   if (results.length > 0) {
-    console.log("User aleady has account with ID",results[0]._id.toString());
-    //console.log(results[0])
-    //console.log(results[0]);
-    presentAccountID = results[0]._id.toString();
-    //return true;
-  } else {
-    let newUser = {
-      username: username,
-      password: password
-    };
-    let newAccount = await users.insertOne(newUser);
+    if (results[0].password === password) {
+      presentAccountID = results[0]._id.toString();
 
-    presentAccountID = newAccount.insertedId.toString();
-    console.log(
-        "New Account Created for ",
-        username,
-        password,
-        "and ID: ",
-        presentAccountID
-    );
+      request.session.accountSession = presentAccountID;
+      request.session.auth = true;
+      request.session.username = username;
+
+      await response.json({message: "Logged in successfully"});
+    }
+    else {
+      await response.json({message: "Wrong account information"});
+    }
+  } else {
+    await response.json({message: "Wrong username"});
   }
-  console.log("The account used for logging in is", presentAccountID);
-  request.session.accountSession = presentAccountID;
-  request.session.auth = true;
-  request.session.username = username;
-  //response.redirect("/mylists.html");
-  response.redirect = "/views/index.html";
-  //response.sendFile(__dirname + "/views/index.html");
-  response.body = response.json(true);
 });
 
 // async function userExists(username) {
@@ -187,8 +173,9 @@ app.post("/sendMessage", async (req, res) => {
   else {
     res.json({message: "You must be logged in to send a message"});
   }
-
 });
+
+app.get("")
 
 let port = process.env.PORT;
 if (port == null || port == "") {
