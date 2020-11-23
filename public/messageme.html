@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <title>Canvas Kicks</title>
+    <style>
+        form {
+            padding: 5%;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"><img height="150px" width="300px" src="/assets/logo.png"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="prevWorks.html">Completed Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="resume.html">Resume</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="messageme.html">Message me! <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<form class="needs-validation" novalidate>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name" required>
+    </div>
+    <div class="form-group">
+        <label for="message">Message</label>
+        <textarea class="form-control" id="message" placeholder="Message text" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="commmethod">Communication Preference</label>
+        <select class="form-control" id="commmethod">
+            <option>Email</option>
+            <option>Call</option>
+            <option>Text</option>
+        </select>
+    </div>
+    <div class="form-group" id="comm">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+        <label for="confirmemail">Confirm Email</label>
+        <input type="email" class="form-control" id="confirmemail" placeholder="Confirm email" required>
+    </div>
+    <button type="submit" class="btn btn-primary" id="submit">Send message!</button>
+</form>
+<script>
+    let name = document.getElementById("name");
+    let message = document.getElementById("message");
+    let preference = document.getElementById("commmethod");
+    let comm = document.getElementById("comm");
+    let submit = document.getElementById("submit");
+    let emailform = `<label for="email">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+        <label for="confirmemail">Confirm Email</label>
+        <input type="email" class="form-control" id="confirmemail" placeholder="Confirm email" required>`;
+    let phoneform = `<label for="phone">Phone number</label>
+        <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" required>
+        <label for="confirmnum">Confirm phone number</label>
+        <input type="email" class="form-control" id="confirmnum" placeholder="Confirm phone number" required>`;
+    // submit.addEventListener("click", (e) => {
+    //     e.preventDefault();
+    //     if (preference.value === "Email") {
+    //         let email = document.getElementById("email");
+    //         let confirm = document.getElementById("confirmemail");
+    //         if (email.value !== confirm.value) {
+    //             let alert = document.createElement("div");
+    //             alert.setAttribute("class", "alert alert-danger");
+    //             alert.setAttribute("role", "alert");
+    //             alert.innerText = "Emails don't match";
+    //             comm.prepend(alert);
+    //         }
+    //     }
+    //
+    // });
+    preference.addEventListener("change", () => {
+        if (preference.value === "Email") {
+            comm.innerHTML = emailform;
+        }
+        else {
+            comm.innerHTML = phoneform;
+        }
+    });
+
+    window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+                    if (preference.value === "Email") {
+                        let email = document.getElementById("email");
+                        let confirm = document.getElementById("confirmemail");
+                        if (email.value !== confirm.value) {
+                            let alert = document.createElement("div");
+                            alert.setAttribute("class", "alert alert-danger alert-dismissible fade show");
+                            alert.setAttribute("role", "alert");
+                            alert.innerHTML = ` Emails don't match
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                            </button>`
+                            comm.prepend(alert);
+                        }
+                        else {
+                            let d = new Date();
+                            let date = d.getMonth() + "-" + d.getDate() + "-" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+                            fetch("/sendmessage", {
+                                method: "POST",
+                                headers: {'Content-Type': 'application/json'},
+                                body: JSON.stringify({message: message.value, commMethod: preference.value, comm: email.value, date, name: name.value})
+                            }).then(res => res.json().then(res => alert(res.message)));
+                        }
+                    }
+                    else {
+                        let phone = document.getElementById("phone");
+                        let confirm = document.getElementById("confirmnum");
+                        if (phone.value !== confirm.value) {
+                            let alert = document.createElement("div");
+                            alert.setAttribute("class", "alert alert-danger alert-dismissible fade show");
+                            alert.setAttribute("role", "alert");
+                            alert.innerHTML = ` Phone numbers don't match
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                            </button>`
+                            comm.prepend(alert);
+                        }
+                        else {
+                            let d = new Date();
+                            let date = d.getMonth() + "-" + d.getDate() + "-" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+                            fetch("/sendmessage", {
+                                method: "POST",
+                                headers: {'Content-Type': 'application/json'},
+                                body: JSON.stringify({message: message.value, commMethod: preference.value, comm: phone.value, date, name: name.value})
+                            }).then(res => res.json().then(res => alert(res.message)));
+                        }
+                    }
+            }, false);
+        });
+    }, false);
+
+</script>
+</body>
+</html>

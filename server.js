@@ -17,10 +17,12 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 let users = null;
 let posts = null;
 let comments = null;
+let messages = null;
 client.connect(err => {
   users = client.db("test").collection("users");
   posts = client.db("test").collection("posts");
   comments = client.db("test").collection("comments");
+  messages = client.db("test").collection("messages");
   // perform actions on the collection object
 });
 let user = null;
@@ -52,10 +54,10 @@ app.post("/register", (request, response) => {
   })
 });
 
-// app.get('/logout', function(req, res){
-//   req.logout();
-//   res.redirect('/');
-// });
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
 app.post("/login", bodyParser.json(), async function(
     request,
@@ -173,6 +175,17 @@ app.post("/deletepost", async (request, response) => {
   else {
     console.log('U r not an admin');
   }
+});
+
+app.post("/sendMessage", async (req, res) => {
+  if (req.session.auth === true) {
+    await messages.insertOne({user: req.session.username, message: req.body.message, date: req.body.date, commMethod: req.body.commMethod, comm: req.body.comm, name: req.body.name});
+    res.json({message: "Message sent successfully"});
+  }
+  else {
+    res.json({message: "You must be logged in to send a message"});
+  }
+
 });
 
 let port = process.env.PORT;
