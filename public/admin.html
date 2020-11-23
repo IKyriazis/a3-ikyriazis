@@ -58,14 +58,13 @@
     window.addEventListener("load", function () {
         let messagecontainer = document.getElementById("messages");
         fetch("/getmessages").then(res => res.json().then(res => {
-            console.log(res);
             if (res.message === "U r not an admin, sry :/") {
                 alert("U r not an admin, sry :/");
             }
             else {
                 res.forEach((message) => {
                     let p = document.createElement("p");
-                    p.innerText = message.message;
+                    p.innerText = "At " + message.date + ", " + message.name + " said: " + message.message + ". They want to be " + message.commMethod.toLowerCase() + "ed at " + message.comm + ".";
                     messagecontainer.appendChild(p);
                 });
             }

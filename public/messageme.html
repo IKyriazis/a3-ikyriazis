@@ -224,7 +224,7 @@
                         fetch("/sendmessage", {
                             method: "POST",
                             headers: {'Content-Type': 'application/json'},
-                            body: JSON.stringify({message: message.value, commMethod: preference.value, comm: email.value, date, name: name.value})
+                            body: JSON.stringify({message: message.value, commMethod: preference.value, comm: email.value, date: date, name: name.value})
                         }).then(res => {
                             res.json().then(res => {
                                 console.log(res.message);
