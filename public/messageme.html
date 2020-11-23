@@ -122,20 +122,28 @@
     let confirm = document.getElementById("confirmemail");
     commfield.addEventListener("change", () => {
         if (confirm.value !== "" && commfield.value !== confirm.value) {
+            commfield.setCustomValidity("Email must match");
+            commfield.reportValidity();
             confirm.setCustomValidity("Email must match");
             confirm.reportValidity();
         }
         else {
+            commfield.setCustomValidity("");
+            commfield.reportValidity();
             confirm.setCustomValidity("");
             confirm.reportValidity();
         }
     });
     confirm.addEventListener("change", () => {
         if (commfield.value !== confirm.value) {
+            commfield.setCustomValidity("Email must match");
+            commfield.reportValidity();
             confirm.setCustomValidity("Email must match");
             confirm.reportValidity();
         }
         else {
+            commfield.setCustomValidity("");
+            commfield.reportValidity();
             confirm.setCustomValidity("");
             confirm.reportValidity();
         }
