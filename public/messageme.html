@@ -103,23 +103,10 @@
             Please confirm your phone number.
         </div>
     `;
-    // submit.addEventListener("click", (e) => {
-    //     e.preventDefault();
-    //     if (preference.value === "Email") {
-    //         let email = document.getElementById("email");
-    //         let confirm = document.getElementById("confirmemail");
-    //         if (email.value !== confirm.value) {
-    //             let alert = document.createElement("div");
-    //             alert.setAttribute("class", "alert alert-danger");
-    //             alert.setAttribute("role", "alert");
-    //             alert.innerText = "Emails don't match";
-    //             comm.prepend(alert);
-    //         }
-    //     }
-    //
-    // });
+
     let commfield = document.getElementById("email");
     let confirm = document.getElementById("confirmemail");
+
     commfield.addEventListener("change", () => {
         if (confirm.value !== "" && commfield.value !== confirm.value) {
             commfield.setCustomValidity("Email must match");

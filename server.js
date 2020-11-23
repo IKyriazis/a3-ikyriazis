@@ -163,7 +163,7 @@ app.post("/deletepost", async (request, response) => {
   }
 });
 
-app.post("/sendMessage", async (req, res) => {
+app.post("/sendmessage", async (req, res) => {
   if (req.session.auth === true) {
     messages.insertOne({user: req.session.username, message: req.body.message, date: req.body.date, commMethod: req.body.commMethod, comm: req.body.comm, name: req.body.name}).then(() => {
       res.json({message: "Message sent successfully"});
@@ -175,7 +175,15 @@ app.post("/sendMessage", async (req, res) => {
   }
 });
 
-app.get("")
+app.get("/getmessages", async (req, res) => {
+  if (req.session.username === "chrees") {
+    let messagelist = await messages.find({}).toArray();
+    res.json(messagelist);
+  }
+  else {
+    res.json({message: "U r not an admin, sry :/"});
+  }
+})
 
 let port = process.env.PORT;
 if (port == null || port == "") {
