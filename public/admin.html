@@ -46,15 +46,15 @@
                 document.body.appendChild(error);
             }
         })
-    })
+    });
     deleteButton.addEventListener("click", function () {
         fetch("/deletepost", {
             method: "POST",
             body: JSON.stringify({title: title.value}),
             headers: {'Content-Type': 'application/json'}
         })
-    })
-
+    });
+    let messages = [];
     window.addEventListener("load", function () {
         let messagecontainer = document.getElementById("messages");
         fetch("/getmessages").then(res => res.json().then(res => {
@@ -63,9 +63,37 @@
             }
             else {
                 res.forEach((message) => {
+                    messages.push(message);
+                    let messagealert = document.createElement("div");
+                    messagealert.setAttribute("class", "alert alert-warning alert-dismissible fade show");
+                    messagealert.setAttribute("role", "alert");
                     let p = document.createElement("p");
                     p.innerText = "At " + message.date + ", " + message.name + " said: " + message.message + ". They want to be " + message.commMethod.toLowerCase() + "ed at " + message.comm + ".";
-                    messagecontainer.appendChild(p);
+                    messagealert.appendChild(p);
+                    let deleteButton = document.createElement("button");
+                    deleteButton.setAttribute("type", "button");
+                    deleteButton.setAttribute("class", "close");
+                    deleteButton.setAttribute("data-dismiss", "alert");
+                    deleteButton.setAttribute("aria-label", "Close");
+                    deleteButton.addEventListener("click", (event) => {
+                        event.preventDefault();
+                        if (confirm("Are you sure you want to delete this message?")) {
+                            fetch("/deletemessage", {
+                                method: "POST",
+                                headers: {'Content-Type': 'application/json'},
+                                body: JSON.stringify({_id: message._id})
+                            }).then(res => {
+                                res.json().then(res => {
+                                    alert(res.message);
+                                    window.location.href = '/admin.html?';
+                                })
+                            });
+                        }
+                    });
+                    let spanhtml = `<span aria-hidden="true">&times;</span>`;
+                    deleteButton.innerHTML = spanhtml;
+                    messagealert.appendChild(deleteButton);
+                    messagecontainer.appendChild(messagealert);
                 });
             }
         }))

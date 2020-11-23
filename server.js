@@ -14,6 +14,7 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const uri = `mongodb+srv://user:abcdef123@cluster0.z38ps.mongodb.net/test?retryWrites=true&w=majority`
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:true});
+let ObjectID = require('mongodb').ObjectID;
 let users = null;
 let posts = null;
 let comments = null;
@@ -183,7 +184,18 @@ app.get("/getmessages", async (req, res) => {
   else {
     res.json({message: "U r not an admin, sry :/"});
   }
-})
+});
+
+app.post("/deletemessage", async (req, res) => {
+  if (req.session.username !== "chrees") {
+    await res.json({message: "u r not adminnnnn"});
+  }
+  else {
+    const _id = new ObjectID(req.body._id);
+    await messages.deleteOne({_id: _id});
+    await res.json({message: "Message deleted"});
+  }
+});
 
 let port = process.env.PORT;
 if (port == null || port == "") {
