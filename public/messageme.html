@@ -118,14 +118,42 @@
     //     }
     //
     // });
+    let commfield = document.getElementById("email");
+    let confirm = document.getElementById("confirmemail");
     preference.addEventListener("change", () => {
         if (preference.value === "Email") {
             comm.innerHTML = emailform;
+            commfield = document.getElementById("email");
+            confirm = document.getElementById("confirmemail");
+            commfield.addEventListener("blur", () => {
+                if (confirm.value !== "" && commfield.value !== confirm.value) {
+                    confirm.setCustomValidity("Email must match");
+                    confirm.reportValidity();
+                }
+                else {
+                    confirm.setCustomValidity("");
+                    confirm.reportValidity();
+                }
+            });
+            confirm.addEventListener("blur", () => {
+                if (commfield.value !== confirm.value) {
+                    confirm.setCustomValidity("Email must match");
+                    confirm.reportValidity();
+                }
+                else {
+                    confirm.setCustomValidity("");
+                    confirm.reportValidity();
+                }
+            })
         }
         else {
             comm.innerHTML = phoneform;
+            commfield = document.getElementById("phone");
+            confirm = document.getElementById("confirmnum");
         }
     });
+
+
 
     window.addEventListener('load', function() {
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -142,15 +170,15 @@
                         let email = document.getElementById("email");
                         let confirm = document.getElementById("confirmemail");
                         if (email.value !== confirm.value) {
-                            let alert = document.createElement("div");
-                            alert.setAttribute("class", "alert alert-danger alert-dismissible fade show");
-                            alert.setAttribute("role", "alert");
-                            alert.innerHTML = ` Emails don't match
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                             <span aria-hidden="true">&times;</span>
-                            </button>`
-                            comm.prepend(alert);
-                            event.preventDefault();
+                            // let alert = document.createElement("div");
+                            // alert.setAttribute("class", "alert alert-danger alert-dismissible fade show");
+                            // alert.setAttribute("role", "alert");
+                            // alert.innerHTML = ` Emails don't match
+                            // <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            //  <span aria-hidden="true">&times;</span>
+                            // </button>`;
+                            // comm.prepend(alert);
+                            // event.preventDefault();
                         }
                         else if (form.checkValidity() === true) {
                             let d = new Date();
