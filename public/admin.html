@@ -14,7 +14,7 @@
     <input placeholder="Title" id="title" type="text">
     <input placeholder="Price" id="price" type="number">
     <input placeholder="Image URL" id="image" type="text">
-    <input placeholder="Date sold (Leave blank if for sale)" type="date">
+    <input placeholder="Date sold (Leave blank if for sale)" id="date" type="date">
     <button id="submit">Submit</button>
     <button id="edit">Edit</button>
     <button id="delete">Delete</button> <br><br>
@@ -31,11 +31,12 @@
     const image = document.getElementById("image");
     const send = document.getElementById("submit");
     const edit = document.getElementById("edit");
+    const date = document.getElementById("date");
     const deleteButton = document.getElementById("delete");
     send.addEventListener("click", function () {
         fetch('/addpost', {
             method: "POST",
-            body: JSON.stringify({title: title.value, price: price.value, image: image.value}),
+            body: JSON.stringify({title: title.value, price: price.value, image: image.value, date: date.value}),
             headers: {'Content-Type': 'application/json'}
         })
     })
