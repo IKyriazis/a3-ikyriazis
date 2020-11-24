@@ -39,7 +39,7 @@
             body: JSON.stringify({title: title.value, price: price.value, image: image.value, date: date.value}),
             headers: {'Content-Type': 'application/json'}
         })
-    })
+    });
     edit.addEventListener("click", function () {
         fetch('/editpost', {
             method: "POST",
