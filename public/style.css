@@ -244,9 +244,11 @@ tbody tr:nth-child(even) {
   display: grid;
   grid-template-columns: 250px 1fr 30px 30px;
   grid-template-rows: 30px;
-  padding-top: 0px;
+  padding-top: 20px;
+  padding-left: 30px;
   margin-top: -20px;
   margin-right: 25px;
+  color: black;
 }
 .addcomment {
   display: grid;
@@ -255,4 +257,8 @@ tbody tr:nth-child(even) {
   padding-top: 0px;
   margin-top: 20px;
   margin-right: -25px;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
 }
